@@ -94,6 +94,18 @@ namespace TestCases
                 Assert.AreEqual(expexted, ex.Message);
             }
         }
+        [TestMethod("HAPPY")]
+        public void ReflectionReturnMethod(string expected)
+        {
+            try
+            {
+                string actual = factory.InvokeAnalyseMood("happy", "AnalyseMood");
+            }
+            catch (CustomException ex)
+            {
+                Assert.AreEqual(expected, ex.Message);
+            }
+        }
 
 
     }
