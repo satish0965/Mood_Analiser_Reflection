@@ -106,6 +106,48 @@ namespace TestCases
                 Assert.AreEqual(expected, ex.Message);
             }
         }
+        [TestMethod]
+        public void SetHappyMessageWithReflectorShouldReturnHappy(string value, string expected, string fieldName)
+        {
+            try
+            {
+                string actual = factory.SetField(value, fieldName);
+                Assert.AreEqual(expected, actual);
+            }
+            catch (CustomException ex)
+            {
+                Assert.AreEqual(expected, ex.Message);
+            }
+        }
+        
+
+        [TestMethod]
+        public void SetFieldWhenImproperShouldThrowExceptionNoSuchField(string value, string expected, string fieldName)
+        {
+            try
+            {
+                string actual = factory.SetField(value, fieldName);
+                Assert.AreEqual(expected, actual);
+            }
+            catch (CustomException ex)
+            {
+                Assert.AreEqual(expected, ex.Message);
+            }
+        }
+      
+        [TestMethod]
+        public void SettingNullMessageWithReflectorShouldThrowException(string value, string expected, string fieldName)
+        {
+            try
+            {
+                string actual = factory.SetField(value, fieldName);
+                Assert.AreEqual(expected, actual);
+            }
+            catch (CustomException ex)
+            {
+                Assert.AreEqual(expected, ex.Message);
+            }
+        }
 
 
     }
