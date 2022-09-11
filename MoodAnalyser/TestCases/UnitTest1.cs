@@ -5,6 +5,8 @@ namespace TestCases
     [TestClass]
     public class AnalyseMoodTestCases
     {
+        private MoodAnalyserFactory factory;
+
         [TestMethod]
         public void GivenMoodAnalyzerClassName_ReturnMoodAnalysisObject(string className, string constructorName)
         {
@@ -42,6 +44,57 @@ namespace TestCases
                 Assert.AreEqual(expected, ex.Message);
             }
         }
+        [TestMethod("I am in sad mood")]
+        public void GivenMoodAnalyserWhenProperShouldReturnMoodAnalyserObject(string message)
+        {
+            MoodAnalysis expected = new MoodAnalysis(message);
+            object obj = null;
+            try
+            {
+                factory = new MoodAnalyserFactory();
+                obj = factory.CreateMoodAnalyseParameterObject("MoodAnalysis", "MoodAnalysis", message);
+            }
+            catch (CustomException actual)
+            {
+                Assert.That(actual.Message, Is.EqualTo(obj));
+            }
+            obj.Equals(expected);
+        }
+
+        [TestMethod]
+        public void GIvenClassNmaeWhenImproperShouldThrowException(string className, string message, string expexted)
+        {
+            MoodAnalysis expected = new MoodAnalysis(message);
+            object obj = null;
+            try
+            {
+                factory = new MoodAnalyserFactory();
+                obj = factory.CreateMoodAnalyseParameterObject(className, "MoodAnalysis", message);
+
+            }
+            catch (CustomException ex)
+            {
+                Assert.AreEqual(expexted, ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void GIvenConstructorNameWhenImproperShouldThrowException(string construtorName, string message, string expexted)
+        {
+            MoodAnalysis expected = new MoodAnalysis(message);
+            object obj;
+            try
+            {
+                factory = new MoodAnalyserFactory();
+                obj = factory.CreateMoodAnalyseParameterObject("MoodAnalysis", construtorName, message);
+
+            }
+            catch (CustomException ex)
+            {
+                Assert.AreEqual(expexted, ex.Message);
+            }
+        }
+
 
     }
 }
